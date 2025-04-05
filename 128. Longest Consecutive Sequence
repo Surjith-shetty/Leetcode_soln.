@@ -1,0 +1,45 @@
+#include <stdlib.h>
+
+int compare(const void* a, const void* b) {
+    return *(int*)a - *(int*)b;
+}
+
+int longestConsecutive(int* nums, int numsSize)
+ {
+    if(numsSize==0)
+    {
+        int zero = 0;
+        return zero;
+    }
+
+    qsort(nums, numsSize, sizeof(int), compare);
+
+    int maxLen = 1;
+    int currLen = 1;
+
+    for (int i = 1; i < numsSize; i++) {
+        if (nums[i] == nums[i - 1])
+         {
+            continue; 
+
+        } 
+        else if (nums[i] == nums[i - 1] + 1)
+        {
+            currLen++;
+        }
+         else
+          {
+            if (currLen > maxLen)
+             {
+                maxLen = currLen;
+            }
+            currLen = 1; 
+          }
+    }
+
+    if (currLen > maxLen){
+     maxLen = currLen;
+    }
+
+    return maxLen;
+}
