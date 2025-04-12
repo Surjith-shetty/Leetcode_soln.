@@ -1,0 +1,45 @@
+int numerizer(char ch);
+
+int romanToInt(char* s) {
+  int l=strlen(s);
+  int i=0;
+  int sum=0;
+while(i<l)
+{
+    if(numerizer(s[i])<numerizer(s[i+1]))
+    {
+        sum+=numerizer(s[i+1])-numerizer(s[i]);
+        i+=2;
+    }
+    else
+    {
+        sum+=numerizer(s[i]);
+        i++;
+    }
+}
+return sum;
+}
+
+int numerizer(char ch)
+{
+    switch(ch)
+    {
+        case 'I':return 1;
+        break;
+        case 'V':return 5;
+        break;
+        case 'X':return 10;
+        break;
+        case 'L':return 50;
+        break;
+        case 'C':return 100;
+        break;
+        case 'D':return 500;
+        break;
+        case 'M':return 1000;
+        break;
+        default: return 0;
+        break;
+    }
+}
+
