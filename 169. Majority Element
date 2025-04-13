@@ -1,0 +1,43 @@
+int majorityElement(int* nums, int numsSize) {
+    
+    for(int i=1;i<numsSize;i++)
+    {
+        int temp=nums[i];
+        int j=i-1;
+        while(j>=0 && nums[j]>temp)
+        {
+            nums[j+1]=nums[j];
+            j--;
+        }
+        nums[j+1]=temp;
+    } //insertion sort
+
+    int count_max=0;
+    int index=numsSize-1;
+    int count=0;
+    for(int i=0;i<numsSize-1;i++)
+    {
+        if(nums[i]==nums[i+1])
+        {
+            count++;
+        }
+        else
+        {
+            if(count_max<count)
+            {
+            count_max=count;
+            index=i;
+            count =0;
+            }
+        }
+
+    }
+ if (count_max < count) {
+        count_max = count;
+        index = numsSize - 1;
+    }
+
+        int max_val=nums[index];
+        return max_val;
+
+}
