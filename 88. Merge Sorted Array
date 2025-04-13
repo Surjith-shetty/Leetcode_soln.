@@ -1,0 +1,21 @@
+void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n) {
+    int i,k,l;
+
+    for(i=0;i<n;i++,m++)
+    {
+        nums1[m]=nums2[i];
+    }
+
+    for(int k=1;k<m;k++)        //insertion sort
+    {
+        int temp=nums1[k];
+        int l=k-1;
+        while(l>=0 && temp<nums1[l])
+        {
+            nums1[l+1]=nums1[l];
+            l--;
+        }
+        nums1[l+1]=temp;
+    }
+
+}
