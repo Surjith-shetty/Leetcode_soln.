@@ -1,0 +1,42 @@
+bool isPalindrome(int x) {
+    if(x<0)
+    {
+        return false;
+    }
+
+    if(x==0)
+    {
+        return true;
+    }
+
+    int n=x;
+    int l=0;
+    while(n!=0)
+    {
+        n=n/10;
+        l++;
+    }
+    int arr[l];
+    n=x;
+    for(int i=l-1;i>=0;i--)
+    {
+        int temp=n%10;
+        arr[i]=temp;
+        n/=10;
+    }
+    
+    int mid=l/2;
+    int i,j;
+    for(i=0,j=l-1;i<=mid;i++,j--)
+    {
+        if(arr[i]==arr[j])
+        continue;
+
+        if(arr[i]!=arr[j])
+        return false; 
+
+    }
+
+    return true;
+    
+}
