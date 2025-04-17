@@ -1,0 +1,49 @@
+bool isValid(char* s) {
+    if(s==NULL)
+    return true;
+
+    int top=-1;
+    int arr[10000];
+    
+    int i=0;
+    while(s[i]!=NULL)
+    {
+        if(s[i]=='(' || s[i]=='{' || s[i]=='[')
+        {
+            ++top;
+            arr[top]=s[i];
+        }
+
+        else if(s[i]==')')
+        {
+            if(top==-1 || arr[top]=='[' || arr[top]=='{')
+            return false;
+
+            if(arr[top]=='(')
+            top--;
+        }
+
+        else if(s[i]=='}')
+        {
+            if(top==-1 || arr[top]=='[' || arr[top]=='(')
+            return false;
+            
+            if(arr[top]=='{')
+            top--;
+        }
+
+        if(s[i]==']') 
+        {
+            if(top==-1 || arr[top]=='(' || arr[top]=='{')
+            return false;
+
+            top--;
+        }
+        i++;
+    }
+
+    if (top==-1)
+    return true;
+
+    return false;
+}
