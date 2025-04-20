@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int trap(int* height, int heightSize) {
+    if (heightSize == 0) return 0;
+
+    int leftMax[heightSize];
+    int rightMax[heightSize];
+
+    leftMax[0] = height[0];
+    for (int i = 1; i < heightSize; i++) {
+        if (height[i] > leftMax[i - 1])
+            leftMax[i] = height[i];
+        else
+            leftMax[i] = leftMax[i - 1];
+    }
+
+    rightMax[heightSize - 1] = height[heightSize - 1];
+    for (int i = heightSize - 2; i >= 0; i--) {
+        if (height[i] > rightMax[i + 1])
+            rightMax[i] = height[i];
+        else
+            rightMax[i] = rightMax[i + 1];
+    }
+
+    int water = 0;
+    for (int i = 0; i < heightSize; i++) {
+        int min = leftMax[i] < rightMax[i] ? leftMax[i] : rightMax[i];
+        water += min - height[i];
+    }
+
+    return water;
+}
