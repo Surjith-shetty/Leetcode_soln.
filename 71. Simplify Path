@@ -1,0 +1,43 @@
+
+char* simplifyPath(char* path) {
+    char** stack = malloc(sizeof(char*) * 3000);
+    int top = 0;
+    char* input = strdup(path);
+    char* token = strtok(input, "/");
+
+    while (token != NULL) {
+        if (strcmp(token, "..") == 0) {
+            if (top > 0) {
+                top--;
+            }
+        } else if (strcmp(token, ".") != 0 && strlen(token) > 0) {
+            stack[top++] = token;
+        }
+        token = strtok(NULL, "/");
+    }
+
+    if (top == 0) {
+        free(stack);
+        free(input);
+        char* result = malloc(2);
+        strcpy(result, "/");
+        return result;
+    }
+
+    int length = 0;
+    for (int i = 0; i < top; i++) {
+        length += strlen(stack[i]) + 1;
+    }
+
+    char* result = malloc(length + 1);
+    result[0] = '\0';
+
+    for (int i = 0; i < top; i++) {
+        strcat(result, "/");
+        strcat(result, stack[i]);
+    }
+
+    free(stack);
+    free(input);
+    return result;
+}
