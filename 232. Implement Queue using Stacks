@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+// Stack node
+typedef struct StackNode {
+    int data;
+    struct StackNode* next;
+} StackNode;
+
+// Stack operations
+StackNode* push(StackNode* top, int x) {
+    StackNode* newNode = (StackNode*)malloc(sizeof(StackNode));
+    newNode->data = x;
+    newNode->next = top;
+    return newNode;
+}
+
+StackNode* pop(StackNode* top, int* popped_value) {
+    if (top == NULL) return NULL;
+    *popped_value = top->data;
+    StackNode* temp = top;
+    top = top->next;
+    free(temp);
+    return top;
+}
+
+int peek(StackNode* top) {
+    return top->data;
+}
+
+bool isEmpty(StackNode* top) {
+    return top == NULL;
+}
+
+// Queue using two stacks
+typedef struct {
+    StackNode* stack1;
+    StackNode* stack2;
+} MyQueue;
+
+MyQueue* myQueueCreate() {
+    MyQueue* q = (MyQueue*)malloc(sizeof(MyQueue));
+    q->stack1 = NULL;
+    q->stack2 = NULL;
+    return q;
+}
+
+void myQueuePush(MyQueue* obj, int x) {
+    obj->stack1 = push(obj->stack1, x);
+}
+
+int myQueuePop(MyQueue* obj) {
+    int val;
+    if (isEmpty(obj->stack2)) {
+        while (!isEmpty(obj->stack1)) {
+            int temp;
+            obj->stack1 = pop(obj->stack1, &temp);
+            obj->stack2 = push(obj->stack2, temp);
+        }
+    }
+    obj->stack2 = pop(obj->stack2, &val);
+    return val;
+}
+
+int myQueuePeek(MyQueue* obj) {
+    if (isEmpty(obj->stack2)) {
+        while (!isEmpty(obj->stack1)) {
+            int temp;
+            obj->stack1 = pop(obj->stack1, &temp);
+            obj->stack2 = push(obj->stack2, temp);
+        }
+    }
+    return peek(obj->stack2);
+}
+
+bool myQueueEmpty(MyQueue* obj) {
+    return isEmpty(obj->stack1) && isEmpty(obj->stack2);
+}
+
+void freeStack(StackNode* top) {
+    while (top != NULL) {
+        StackNode* temp = top;
+        top = top->next;
+        free(temp);
+    }
+}
+
+void myQueueFree(MyQueue* obj) {
+    freeStack(obj->stack1);
+    freeStack(obj->stack2);
+    free(obj);
+}
