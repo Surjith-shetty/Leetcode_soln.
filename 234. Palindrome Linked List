@@ -1,0 +1,32 @@
+bool isPalindrome(struct ListNode* head)
+ {    
+    if(head==NULL)
+    return false;
+    
+    struct ListNode *temp=head;
+
+    int arr[500001];
+    int l=0;
+    while(temp!=NULL)
+    {
+        arr[l]=temp->val;
+        l++;
+        temp=temp->next;
+    }   
+
+    temp=head;
+    for(int i=l-1;i>=(l/2);i--)
+    {
+        
+        if(temp->val != arr[i])
+        return false;
+
+        if(temp->val == arr[i])
+        {
+            temp=temp->next;
+        }
+
+    }
+
+    return true;
+}
