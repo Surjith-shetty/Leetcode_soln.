@@ -1,0 +1,61 @@
+struct ListNode* deleteMiddle(struct ListNode* head)
+{
+    if(head==NULL)
+    return head;
+
+    if(head->next==NULL)
+    {
+        head=NULL;
+        return head;
+    }
+
+    struct ListNode* temp = head;
+    int l=-2;
+    while(temp!=NULL)
+    {
+        l++;
+        temp=temp->next;
+    }
+
+    if(l%2!=0)
+    {
+    temp=head;
+    struct ListNode* temp1=temp->next;
+
+    if(l==2)
+    {
+        temp->next=NULL;
+        return head;
+    }
+
+    for(int i=0;i<(l/2);i++)
+    {
+        temp=temp->next;
+        temp1=temp1->next;
+    }
+    temp->next=temp1->next;
+    }
+
+    else
+    {
+        l=l+1;
+        temp=head;
+    struct ListNode* temp1=temp->next;
+
+    if(l==2)
+    {
+        temp->next=NULL;
+        return head;
+    }
+
+    for(int i=0;i<(l/2);i++)
+    {
+        temp=temp->next;
+        temp1=temp1->next;
+    }
+    temp->next=temp1->next;
+
+    }
+
+    return head;
+}
