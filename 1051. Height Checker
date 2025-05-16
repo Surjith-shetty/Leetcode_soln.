@@ -1,0 +1,30 @@
+int heightChecker(int* heights, int heightsSize) {
+    int arr[heightsSize];
+
+    for(int i=0;i<heightsSize;i++)
+    {
+        arr[i]=heights[i];
+    }
+
+    for(int i=1;i<heightsSize;i++)
+    {
+        int j=i-1;
+        int temp=arr[i];
+        while(j>=0 && arr[j]>temp)
+        {
+            arr[j+1]=arr[j];
+            j--;
+        }
+        arr[j+1]=temp;
+    } //sorting
+
+    int count=0;
+    for(int i=0;i<heightsSize;i++)
+    {
+        if(arr[i]==heights[i])
+        continue;
+
+        count++;
+    }
+    return count;
+}
