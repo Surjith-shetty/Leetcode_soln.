@@ -1,0 +1,20 @@
+int arrayPairSum(int* nums, int numsSize) {
+    for(int i=0;i<numsSize;i++)
+    {
+        int j=i-1;
+        int temp=nums[i];
+        while(j>=0 && nums[j]>temp)
+        {
+            nums[j+1]=nums[j];
+            j--;
+        }
+            nums[j+1]=temp;
+    }
+    int count=0;
+    int i,j;
+    for(i=0,j=1;j<=numsSize;i+=2,j+=2)
+    {
+        count+=nums[i];
+    }
+    return count;
+}
