@@ -1,0 +1,62 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+struct node {
+    int data;
+    int index;
+};
+
+int* maxSubsequence(int* nums, int numsSize, int k, int* returnSize) 
+{
+    struct node nodes[numsSize];
+
+    for(int i = 0; i < numsSize; i++)
+    {
+        nodes[i].data = nums[i];
+        nodes[i].index = i;
+    }
+
+    for(int i = 1; i < numsSize; i++)
+    {
+        struct node key = nodes[i];          
+        int j = i - 1;
+        while(j >= 0 && key.data > nodes[j].data)  
+        {
+            nodes[j + 1] = nodes[j];         
+            j--;
+        }
+        nodes[j + 1] = key;                  
+    }
+
+    
+    *returnSize = k;
+    int *arr = (int *)malloc( k *sizeof(int));
+
+    struct node temp[k];
+
+    for(int i=0; i<k;i++)
+    {
+        temp[i].data = nodes[i].data;
+        temp[i].index = nodes[i].index;
+    }
+
+    for(int i=1;i<k;i++)
+    {
+        int j=i-1;
+        struct node key = temp[i];
+        while(j>=0 && key.index < temp[j].index)
+        {
+            temp[j + 1] = temp[j];         
+            j--;
+        }
+        temp[j + 1] = key;                  
+    }
+
+    for(int i=0;i<k;i++)
+    {
+        arr[i] = temp[i].data;
+    }
+        
+
+    return arr;
+}
