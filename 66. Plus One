@@ -1,0 +1,36 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* plusOne(int* digits, int digitsSize, int* returnSize) {
+    int *arr;
+        arr = (int *)malloc((digitsSize)*sizeof(int));
+        *returnSize=digitsSize;
+        int carry=1;
+        for(int i=digitsSize-1;i>=0;i--){
+            if(digits[i]==9 && carry==1 && i!=0 ){
+                arr[i]=0;
+                carry=1;
+            }
+            else if(digits[i]!=9 && carry==1){
+                arr[i]=digits[i]+1;
+                carry=0;
+            }
+            else if(digits[i]==9 && carry==1 && i==0){                
+                int *arr1 = (int *)malloc((digitsSize+1)*sizeof(int));
+                *returnSize = digitsSize + 1;
+                arr1[0]=1;
+                arr[0] = 0; 
+                for(int i=1;i<digitsSize + 1;i++)
+                {
+                    arr1[i]=arr[i-1];
+                }
+                free(arr);
+                
+                return arr1;
+            }
+            else            {
+                arr[i]=digits[i];
+            }
+        }
+    return arr;
+}
