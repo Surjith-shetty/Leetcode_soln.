@@ -1,0 +1,30 @@
+//note t and s is been swapped in function 
+
+bool isSubsequence(char* t, char* s) {
+    if(s[0]==NULL && t[0]==NULL)
+    return true;
+
+    if(s[0]==NULL)
+    return false;
+
+    if(t[0]==NULL)
+    return true;
+
+    
+    
+  int i,j=0;
+  int l=strlen(s);
+  int m=strlen(t);
+  for(i=0;i<l;i++)
+  {
+    if(t[j]==s[i])
+    {
+        j++;
+        if(j>=m)
+        {
+            return true;
+        }
+    }
+  }  
+  return false;
+}
