@@ -1,0 +1,28 @@
+int cmp(const void* a, const void* b) {
+    return (*(char*)a - *(char*)b);
+}
+
+bool isAnagram(char* s, char* t) {
+
+    int n =0;
+    while(s[n]!='\0')
+    {
+        n++;
+    }
+    int n1=0;
+    while(t[n1]!='\0')
+    {
+        n1++;
+    }
+
+    qsort(s, n, sizeof(char), cmp);
+    qsort(t, n1, sizeof(char), cmp);
+
+    if(n==0 || n1==0 || n!=n1)
+    {
+        return false;
+    }
+
+    return !(strcmp(s,t));
+}
+
