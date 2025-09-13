@@ -1,0 +1,26 @@
+int maxFreqSum(char* s) {
+    
+    int arr[123]={0};
+    int i=0;
+    while(i<strlen(s))
+    {
+        arr[s[i]]++;
+        i++;
+    }
+    int max_vow=0;
+    int max_const=0;
+    
+    for(int i=0;i<123;i++)
+    {
+        if(i!=97 && i!=101 && i!=105 && i!=117 && i!=111)
+        {
+            max_const = (max_const > arr[i]) ? max_const : arr[i];
+        }
+        
+        else{
+            max_vow = (max_vow > arr[i])? max_vow :arr[i];
+        }
+    }
+    
+       return max_vow + max_const;
+}
