@@ -1,0 +1,14 @@
+int numWaterBottles(int numBottles, int numExchange)
+{
+    int totdrunk=numBottles; //drunk all initially
+    int empty = numBottles;  //empty after initial drink
+
+    while(empty >= numExchange)
+    {
+        int quo = empty / numExchange;
+        int rem = empty % numExchange;
+        totdrunk+=quo;
+        empty = quo + rem;
+    }
+    return totdrunk;
+}
