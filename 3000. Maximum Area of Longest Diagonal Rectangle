@@ -1,0 +1,22 @@
+int areaOfMaxDiagonal(int** dimensions, int dimensionsSize, int* dimensionsColSize)
+{
+    int max=0;
+    int area=0;
+
+   for(int i=0;i<dimensionsSize;i++)
+   {
+      if((dimensions[i][0]*dimensions[i][0])+(dimensions[i][1]*dimensions[i][1])>max)
+      {
+        max=(dimensions[i][0]*dimensions[i][0])+(dimensions[i][1]*dimensions[i][1]);
+        area=dimensions[i][0]*dimensions[i][1];
+      }
+      if((dimensions[i][0]*dimensions[i][0])+(dimensions[i][1]*dimensions[i][1])==max)
+      {
+        if(area>=(dimensions[i][0]*dimensions[i][1]))
+        continue;
+        else
+        area=dimensions[i][0]*dimensions[i][1];
+      }
+   }   
+   return area; 
+}
