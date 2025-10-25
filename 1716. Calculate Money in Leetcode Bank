@@ -1,0 +1,20 @@
+int totalMoney(int n) 
+{
+    int today=0;
+    int curr_monday=1;
+    int to_amt=0;
+
+    while(n!=0)
+    {
+        if(today==7)
+        {
+            today=0;
+            curr_monday++;
+            continue;
+        }
+        to_amt += (curr_monday + today);
+        today++;
+        n--;
+    }
+    return to_amt;
+}
