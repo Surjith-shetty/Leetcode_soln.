@@ -1,0 +1,20 @@
+int smallestNumber(int n) 
+{
+    int num=1;
+    
+    if(n==0)
+    {
+        return 0;
+    }
+
+    while(1)
+    {
+        if(num>n)
+        {
+            num--;
+            return num;            
+        }
+        num=num*2;
+    }
+}
+
