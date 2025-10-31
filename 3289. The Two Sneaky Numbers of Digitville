@@ -1,0 +1,25 @@
+
+int* getSneakyNumbers(int* nums, int numsSize, int* returnSize) 
+{
+    int arr[100]={0};  
+
+    for(int i=0;i<numsSize;i++)
+    {
+        arr[nums[i]]++;
+    }
+
+    int *two = malloc(2 * sizeof(int));
+
+    int j;
+    for(int i=0,j=0;i<100;i++)
+    {
+        if(arr[i]==2)
+        {
+            two[j]=i;
+            j++;
+        }
+    }
+
+    *returnSize=2;
+    return two;
+}
