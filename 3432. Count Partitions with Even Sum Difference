@@ -1,0 +1,30 @@
+int countPartitions(int* nums, int numsSize) 
+{
+    int sum1=nums[0];
+    int sum2=0;
+
+    for(int i=1;i<numsSize;i++)
+    {
+        sum2+=nums[i];
+    }    
+
+    int i=1;
+    int count=0;
+    while(i!=numsSize-1)
+    {
+        if((sum1-sum2)%2==0)
+        {
+            count++;
+        }
+        sum1+=nums[i];
+        sum2-=nums[i];
+        i++;
+    }
+    sum1+=nums[i];
+    sum2-=nums[i];
+    if((sum1-sum2)%2==0)
+        {
+            count++;
+        }
+    return count;
+}
