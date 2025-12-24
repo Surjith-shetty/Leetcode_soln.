@@ -1,0 +1,32 @@
+int cmp(const void *a, const void *b)
+{
+    return *(int *)a - *(int *)b;
+} 
+
+int minimumBoxes(int* apple, int appleSize, int* capacity, int capacitySize) 
+{
+
+    if(appleSize==0)
+    return 0;
+
+    int tot_apples = 0;
+    for(int i=0 ;i<appleSize ;i++)
+    {
+        tot_apples+=apple[i];
+    }
+
+    qsort(capacity,capacitySize,sizeof(int),cmp);
+
+    int tot=0;
+    int cap_size=0;
+    for(int j=capacitySize-1;j>-1;j--)
+    {
+        if(cap_size>=tot_apples)
+        {
+            return tot;
+        }
+        tot++;
+        cap_size+=capacity[j];
+    }
+    return capacitySize;
+}
