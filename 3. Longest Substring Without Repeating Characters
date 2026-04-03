@@ -1,0 +1,25 @@
+int lengthOfLongestSubstring(char* s) {
+    int hash[300] = {0};
+    int max=0;
+    int i=0,j=0;
+    int n = strlen(s);
+
+    if(n==0)
+    return 0;
+
+    while(i<=j && j<n)
+    {
+        hash[s[j]]++;
+
+        while(hash[s[j]]>1)
+        {
+            hash[s[i]]--;
+            i++;
+        }
+
+        int len = j - i;
+        max = (max>len)?max:len;
+        j++;
+    }
+    return max+1;
+}
