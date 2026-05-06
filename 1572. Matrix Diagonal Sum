@@ -1,0 +1,28 @@
+class Solution {
+    public int diagonalSum(int[][] mat) {
+
+       int l = mat.length; //given sqaure matrix
+
+        if(l==0)
+        return 0;
+
+       int sum = 0;
+        for(int i=0;i<l;i++)
+        {
+            sum += mat[i][i];
+        } //primary diagonal
+
+        for(int i=0,j=l-1;j>=0;i++,j--)
+        {
+            sum+=mat[i][j];
+        } //secondary diagonal
+
+        if(l%2==1)
+        {
+            int mid = l/2;
+            sum-=mat[mid][mid];
+        }
+
+    return sum;
+}
+}
